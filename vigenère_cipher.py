@@ -1,20 +1,25 @@
-ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+import pandas as pd
 
+ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
 
-
-
-def rotate_left(string: str):
-    return string[1:] + string[:1]
+def rotate_left(alphabet_list: list):
+    return alphabet_list[1:] + alphabet_list[:1]
 
 table_key = 'hello123'
-
-alphabet = list(ALPHABET)
 table_key = list(table_key.upper())
 
-custom_alphabet = table_key + [char for char in alphabet if char not in table_key]
+alphabet = list(set(table_key + [char for char in ALPHABET if char not in table_key]))
 
-print(custom_alphabet)
+table = []
+for i in range(len(alphabet) - 1):
+    if i != 0:
+        alphabet = rotate_left(alphabet)
+        table.append(alphabet)
+    else:
+        table.append(alphabet)
 
+table = pd.DataFrame(table)
+table.columns = ALPHABET
+table.index = ALPHABET
 
-        
 

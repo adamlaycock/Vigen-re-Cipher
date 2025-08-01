@@ -6,7 +6,6 @@ VALID_CHOICES = ['encryption', 'decryption']
 def construct_table(
     table_key: str
 ) -> pd.DataFrame:
-    
     table_key = list(table_key.upper())
     seen = set()
     alphabet = [char for char in table_key + ALPHABET if not (char in seen or seen.add(char))]
@@ -28,7 +27,6 @@ def encrypt_plaintext(
     key: str,
     table_key: str
 ):
-    
     table = construct_table(table_key)
 
     plaintext = plaintext.upper()

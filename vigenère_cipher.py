@@ -1,9 +1,6 @@
 import pandas as pd
 
 ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
-table_key = 'hello123'
-key = 'lucifer'
-plaintext = 'thisisasecretmessage'
 
 def construct_table(table_key: str):
     table_key = list(table_key.upper())
@@ -34,6 +31,16 @@ def encrypt_plaintext(
         cipher_text.append(table.loc[p_char, k_char])
     return ''.join(cipher_text)
 
-table = construct_table(table_key)
-encrypted = encrypt_plaintext(plaintext, key, table)
-print(encrypted)
+def decrypt_plaintext(
+    cipher_text: str,
+    key: str,
+    table: pd.DataFrame
+):
+    cipher_text = cipher_text.upper()
+    key = key.upper()
+    ext_key = (key * ((len(cipher_text) // len(key)) + 1))[:len(cipher_text)]
+
+    plaintext = []
+    for c_char, k_char in zip(cipher_text, ext_key):
+        plaintext.append(table[table[k_char] == c_char].index[0])
+    return ''.join(plaintext)

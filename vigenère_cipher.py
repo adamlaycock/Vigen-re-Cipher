@@ -1,6 +1,7 @@
 import pandas as pd
 
 ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+VALID_CHOICES = ['encryption', 'decryption']
 
 def construct_table(
     table_key: str
@@ -41,7 +42,7 @@ def encrypt_plaintext(
     print(''.join(cipher_text))
 
 
-def decrypt_plaintext(
+def decrypt_ciphertext(
     cipher_text: str,
     key: str,
     table_key: str
@@ -57,3 +58,24 @@ def decrypt_plaintext(
         plaintext.append(table[table[k_char] == c_char].index[0])
 
     print(''.join(plaintext))
+
+
+def main():
+    print('Welcome to the Vigenère cipher script!')
+    print("Please enter choose from either 'encryption' or 'decryption': ")
+    choice = input()
+    if choice not in VALID_CHOICES:
+        print('Unexpected entry, please refresh.')
+    else:
+        print(f'{choice.upper()} CHOSEN')
+        text = input('Please enter text:')
+        table_key = input('Please enter custom alphabet key:')
+        key = input('Please enter text key:')
+        if choice == 'encryption':
+            encrypt_plaintext(text, key, table_key)
+        else:
+            decrypt_ciphertext(text, key, table_key)
+
+
+if __name__ == '__main__':
+    main()

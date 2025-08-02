@@ -1,6 +1,6 @@
 import pandas as pd
 
-ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ')
 VALID_CHOICES = ['encryption', 'decryption']
 
 def construct_table(

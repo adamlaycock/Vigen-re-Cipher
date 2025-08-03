@@ -6,6 +6,18 @@ VALID_CHOICES = ['encryption', 'decryption']
 def construct_table(
     table_key: str
 ) -> pd.DataFrame:
+    """
+    Constructs a Pandas DataFrame containing a Vigenère table built from a
+    custom alphabet using table_key.
+
+    Args:
+        table_key (str): String used to build a custom alphabet for the 
+                         Vigenère table.
+
+    Returns:
+        pd.DataFrame: Pandas DataFrame containing the Vigenère table with 
+                      appropriate columns and indices.
+    """
     table_key = list(table_key.upper())
     seen = set()
     alphabet = [char for char in table_key + ALPHABET if not (char in seen or seen.add(char))]
@@ -27,6 +39,19 @@ def encrypt_plaintext(
     key: str,
     table_key: str
 ):
+    """
+    Encrypts a message through a Vigenère cipher using a cipher key and a key 
+    to construct a custom alphabet.
+
+    Args:
+        plaintext (str): String containing the message text to be encrypted.
+        key (str): Cipher key to use for encryption.
+        table_key (str): String used to build a custom alphabet for the 
+                         Vigenère table.
+
+    Returns:
+        None
+    """
     table = construct_table(table_key)
 
     plaintext = plaintext.upper()
@@ -45,6 +70,20 @@ def decrypt_ciphertext(
     key: str,
     table_key: str
 ):
+    """
+    Decrypts a message encoded using a Vigenère cipher when provided the 
+    cipher key and the key to construct the custom alphabet used for 
+    encryption.
+
+    Args:
+        cipher_text (str): String containing the encrypted message.
+        key (str): Cipher key to use for encryption.
+        table_key (str): String used to build a custom alphabet for the 
+                         Vigenère table.
+
+    Returns:
+        None
+    """
     table = construct_table(table_key)
 
     cipher_text = cipher_text.upper()

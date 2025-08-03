@@ -3,6 +3,13 @@ import pandas as pd
 ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ')
 VALID_OPTIONS = ['encryption', 'decryption']
 
+def validate_input(
+    text
+):
+    invalid = set(text.upper()) - set(ALPHABET)
+    if invalid:
+        raise ValueError(f"Invalid character/s found: {' '.join(invalid)}")
+
 def construct_table(
     table_key: str
 ) -> pd.DataFrame:
@@ -113,14 +120,17 @@ def get_valid_choice():
 def get_user_inputs():
     print('TEXT:')
     text = input('Enter text: ').strip()
+    validate_input(text)
     print(text)
 
     print('\nALPHABET KEY:')
     table_key = input('Enter alphabet key: ').strip()
+    validate_input(table_key)
     print(table_key)
 
     print('\nCIPHER KEY:')
     key = input('Enter cipher key: ').strip()
+    validate_input(key)
     print(key)
 
     return text, table_key, key

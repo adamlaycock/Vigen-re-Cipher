@@ -1,7 +1,7 @@
 import pandas as pd
 
 ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ')
-VALID_CHOICES = ['encryption', 'decryption']
+VALID_OPTIONS = ['encryption', 'decryption']
 
 def construct_table(
     table_key: str
@@ -95,6 +95,14 @@ def decrypt_ciphertext(
         plaintext.append(table[table[k_char] == c_char].index[0])
 
     print(''.join(plaintext))
+
+def get_valid_choice():
+    while True:
+        print('Would you like to use encryption or decryption functionality?')
+        choice = input('Please choose from either "encryption" or "decryption":').strip().lower()
+        if choice in VALID_OPTIONS:
+            return choice
+        print(f'Unexpected input "{choice}". Please choose from either "encryption" or "decryption".')
 
 
 def main():

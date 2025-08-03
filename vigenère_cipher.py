@@ -99,28 +99,45 @@ def decrypt_ciphertext(
 def get_valid_choice():
     while True:
         print('Would you like to use encryption or decryption functionality?')
-        choice = input('Please choose from either "encryption" or "decryption":').strip().lower()
+        choice = input(
+            'Please choose from either "encryption" or "decryption":'
+        )
+        choice = choice.strip().lower()
+
         if choice in VALID_OPTIONS:
             return choice
-        print(f'Unexpected input "{choice}". Please choose from either "encryption" or "decryption".')
+        
+        print(f'Unexpected input: "{choice}".') 
+        print('Please choose from either "encryption" or "decryption".\n')
 
+def get_user_inputs():
+    print('TEXT:')
+    text = input('Enter text: ').strip()
+    print(text)
+
+    print('\nALPHABET KEY:')
+    table_key = input('Enter alphabet key: ').strip()
+    print(table_key)
+
+    print('\nCIPHER KEY:')
+    key = input('Enter cipher key: ').strip()
+    print(key)
+
+    return text, table_key, key
 
 def main():
-    print('Vigenère Cipher Script')
-    print("Please enter either 'encryption' or 'decryption' to proceed: ")
-    choice = input()
-    if choice not in VALID_CHOICES:
-        print('Unexpected entry, please refresh.')
-    else:
-        print(f'{choice.upper()} CHOSEN')
-        text = input('Please enter text:')
-        table_key = input('Please enter an alphabet key:')
-        key = input('Please enter a cipher key:')
-        if choice == 'encryption':
-            encrypt_plaintext(text, key, table_key)
-        else:
-            decrypt_ciphertext(text, key, table_key)
+    print('Vigenère Cipher Tool\n')
 
+    choice = get_valid_choice()
+    print(f'\nYou have chosen {choice}.\n')
+
+    text, table_key, key = get_user_inputs()
+
+    print('\nOUTPUT:')
+    if choice == 'encryption':
+        encrypt_plaintext(text, key, table_key)
+    else:
+        decrypt_ciphertext(text, key, table_key)
 
 if __name__ == '__main__':
     main()

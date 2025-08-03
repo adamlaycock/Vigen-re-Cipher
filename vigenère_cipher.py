@@ -98,16 +98,16 @@ def decrypt_ciphertext(
 
 
 def main():
-    print('Welcome to the Vigenère cipher script!')
-    print("Please enter choose from either 'encryption' or 'decryption': ")
+    print('Vigenère Cipher Script')
+    print("Please enter either 'encryption' or 'decryption' to proceed: ")
     choice = input()
     if choice not in VALID_CHOICES:
         print('Unexpected entry, please refresh.')
     else:
         print(f'{choice.upper()} CHOSEN')
         text = input('Please enter text:')
-        table_key = input('Please enter custom alphabet key:')
-        key = input('Please enter text key:')
+        table_key = input('Please enter an alphabet key:')
+        key = input('Please enter a cipher key:')
         if choice == 'encryption':
             encrypt_plaintext(text, key, table_key)
         else:

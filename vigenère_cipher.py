@@ -1,12 +1,12 @@
 import pandas as pd
 
-ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 ')
+ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ')
 VALID_OPTIONS = ['encryption', 'decryption']
 
 def validate_input(
     text
 ):
-    invalid = set(text.upper()) - set(ALPHABET)
+    invalid = set(text) - set(ALPHABET)
     if invalid:
         raise ValueError(f"Invalid character/s found: {' '.join(invalid)}")
 
@@ -25,7 +25,7 @@ def construct_table(
         pd.DataFrame: Pandas DataFrame containing the Vigenère table with 
                       appropriate columns and indices.
     """
-    table_key = list(table_key.upper())
+    table_key = list(table_key)
     seen = set()
     alphabet = [char for char in table_key + ALPHABET if not (char in seen or seen.add(char))]
 
@@ -61,8 +61,6 @@ def encrypt_plaintext(
     """
     table = construct_table(table_key)
 
-    plaintext = plaintext.upper()
-    key = key.upper()
     ext_key = (key * ((len(plaintext) // len(key)) + 1))[:len(plaintext)]
     
     cipher_text = []
@@ -93,8 +91,6 @@ def decrypt_ciphertext(
     """
     table = construct_table(table_key)
 
-    cipher_text = cipher_text.upper()
-    key = key.upper()
     ext_key = (key * ((len(cipher_text) // len(key)) + 1))[:len(cipher_text)]
 
     plaintext = []

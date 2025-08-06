@@ -6,13 +6,16 @@ SYMBOLS = list('!@#$%^&*()_+-=[]{}|;:\'",.<>?/~`£€')
 CHARACTERS = ALPHABET + NUMBERS + SYMBOLS
 VALID_OPTIONS = ['encryption', 'decryption']
 
-
 def validate_input(
-    text
+    text: str
 ):
     invalid = set(text) - set(CHARACTERS)
     if invalid:
-        raise ValueError(f"Invalid character/s found: {' '.join(invalid)}")
+        print(f"\nUnsupported character/s found: {' '.join(invalid)}")
+        print('Removing unsupported characters from the string.\n')
+    text = ''.join(char for char in text if char in CHARACTERS)
+
+    return text
 
 def construct_table(
     table_key: str
@@ -120,17 +123,17 @@ def get_valid_choice():
 def get_user_inputs():
     print('TEXT:')
     text = input('Enter text: ').strip()
-    validate_input(text)
+    text = validate_input(text)
     print(text)
 
     print('\nCHARACTERS KEY:')
     table_key = input('Enter alphabet key: ').strip()
-    validate_input(table_key)
+    table_key = validate_input(table_key)
     print(table_key)
 
     print('\nCIPHER KEY:')
     key = input('Enter cipher key: ').strip()
-    validate_input(key)
+    key = validate_input(key)
     print(key)
 
     return text, table_key, key

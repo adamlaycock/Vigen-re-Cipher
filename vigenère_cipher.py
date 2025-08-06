@@ -1,12 +1,16 @@
 import pandas as pd
 
-ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ')
+ALPHABET = list('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ')
+NUMBERS = list('0123456789')
+SYMBOLS = list('!@#$%^&*()_+-=[]{}|;:\'",.<>?/~`£€')
+CHARACTERS = ALPHABET + NUMBERS + SYMBOLS
 VALID_OPTIONS = ['encryption', 'decryption']
+
 
 def validate_input(
     text
 ):
-    invalid = set(text) - set(ALPHABET)
+    invalid = set(text) - set(CHARACTERS)
     if invalid:
         raise ValueError(f"Invalid character/s found: {' '.join(invalid)}")
 
@@ -27,7 +31,7 @@ def construct_table(
     """
     table_key = list(table_key)
     seen = set()
-    alphabet = [char for char in table_key + ALPHABET if not (char in seen or seen.add(char))]
+    alphabet = [char for char in table_key + CHARACTERS if not (char in seen or seen.add(char))]
 
     table = []
     for i in range(len(alphabet)):
@@ -119,7 +123,7 @@ def get_user_inputs():
     validate_input(text)
     print(text)
 
-    print('\nALPHABET KEY:')
+    print('\nCHARACTERS KEY:')
     table_key = input('Enter alphabet key: ').strip()
     validate_input(table_key)
     print(table_key)

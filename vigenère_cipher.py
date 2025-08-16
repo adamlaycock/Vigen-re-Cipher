@@ -8,7 +8,18 @@ VALID_OPTIONS = ['encryption', 'decryption']
 
 def validate_input(
     text: str
-):
+) -> str:
+    """
+    Checks inputted text for characters that are not present in CHARACTERS. If 
+    unsupported characters are found, displays an error and removes them from
+    the inputted text.
+
+    Args:
+        text (str): String to be assessed for unsupported characters.
+
+    Returns:
+        str: String after unsupported characters have been removed.
+    """
     invalid = set(text) - set(CHARACTERS)
     if invalid:
         print(f"\nUnsupported character/s found: {' '.join(invalid)}")
@@ -107,6 +118,16 @@ def decrypt_ciphertext(
     print(''.join(plaintext))
 
 def get_valid_choice():
+    """
+    Prompts the user for information on whether they would like to encrypt or
+    decrypt messages using the cipher.
+
+    Args:
+        None
+
+    Returns:
+        str: String containing either 'encryption' or 'decryption'.
+    """
     while True:
         print('Would you like to use encryption or decryption functionality?')
         choice = input(
@@ -121,6 +142,21 @@ def get_valid_choice():
         print('Please choose from either "encryption" or "decryption".\n')
 
 def get_user_inputs():
+    """
+    Prompts the user to provide information necessary for encryption or 
+    decryption.
+
+    Args:
+        None
+
+    Returns:
+        str: String containing the text after removal of unsupported 
+             characters.
+        str: String containing the alphabet key after removal of unsupporeted
+             characters.
+        str: String containing the cipher key after the removal of unsupported
+             characters.
+    """
     print('TEXT:')
     text = input('Enter text: ').strip()
     text = validate_input(text)
